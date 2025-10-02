@@ -373,7 +373,9 @@
 
         # this will make a package out of each of the packageDefinitions defined above
         # and set the default package to the one passed in here.
-        packages = utils.mkAllWithDefault defaultPackage;
+        packages = utils.mkAllWithDefault defaultPackage // {
+          prettier-with-plugins = pkgs.callPackage ./packages/prettier-with-plugins.nix { };
+        };
 
         # choose your package for devShell
         # and add whatever else you want in it.
@@ -385,7 +387,6 @@
             shellHook = '''';
           };
         };
-
       }
     )
     // (
@@ -430,7 +431,6 @@
         nixosModules.default = nixosModule;
         homeModules.default = homeModule;
 
-        inherit utils nixosModule homeModule;
         inherit (utils) templates;
       }
     );
