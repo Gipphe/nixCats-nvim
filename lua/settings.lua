@@ -35,7 +35,6 @@ vim.opt.clipboard = 'unnamedplus'
 
 -- Save undo history
 vim.opt.undofile = true
-vim.opt.undodir = os.getenv 'HOME' .. '/.vim/undodir'
 vim.opt.undolevels = 10000
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
