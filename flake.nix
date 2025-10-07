@@ -4,6 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
+    nixpkgs-with-working-ghci-dap.url = "github:nixos/nixpkgs/e9f00bd893984bc8ce46c895c3bf7cac95331127";
 
     # neovim-nightly-overlay = {
     #   url = "github:nix-community/neovim-nightly-overlay";
@@ -157,13 +158,23 @@
 
             basedpyright = [ basedpyright ];
 
-            haskell = with haskellPackages; [
-              fast-tags
-              ghci-dap
-              haskell-debug-adapter
-              haskell-language-server
-              hoogle
-            ];
+            haskell =
+              (with haskellPackages; [
+                fast-tags
+                haskell-language-server
+                hoogle
+              ])
+              ++ (
+                # ghci-dap is currently marked as broken in nixpkgs. Due to a
+                # bug, we cannot neatly override the version.
+                # See https://github.com/NixOS/nixpkgs/issues/235960
+                #
+                # So we fetch `ghci-dap` and `haskell-debug-adapter` from an
+                # earlier `nixpkgs`.
+                with inputs.nixpkgs-with-working-ghci-dap.legacyPackages.${system}.haskellPackages; [
+                  ghci-dap
+                  haskell-debug-adapter
+                ]);
           };
 
           # This is for plugins that will load at startup without using packadd:
