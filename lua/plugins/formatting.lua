@@ -41,7 +41,7 @@ return {
         fish = { 'fish_indent' },
         graphql = prettier,
         handlebars = prettier,
-        haskell = { 'ormolu', 'fourmolu' },
+        haskell = { 'ormolu', 'fourmolu', stop_after_first = true },
         html = prettier,
         javascript = prettier,
         javascriptreact = prettier,
@@ -59,6 +59,8 @@ return {
         typescriptreact = prettier,
         vue = prettier,
         yaml = prettier,
+        ['*'] = { 'codespell' },
+        ['_'] = { 'trim_whitespace' },
       },
       formatters = {
         injected = {
