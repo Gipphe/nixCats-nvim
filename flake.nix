@@ -115,6 +115,7 @@
           # this includes LSPs
           lspsAndRuntimeDeps = with pkgs; {
             general = [
+              codespell
               fd
               fourmolu
               haskellPackages.cabal-fmt
