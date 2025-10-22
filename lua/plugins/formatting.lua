@@ -41,7 +41,7 @@ return {
         fish = { 'fish_indent' },
         graphql = prettier,
         handlebars = prettier,
-        haskell = { 'ormolu', 'fourmolu', stop_after_first = true },
+        haskell = { 'fourmolu' },
         html = prettier,
         javascript = prettier,
         javascriptreact = prettier,
