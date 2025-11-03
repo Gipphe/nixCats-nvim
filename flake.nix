@@ -12,7 +12,7 @@
 
     # see :help nixCats.flake.inputs
     # If you want your plugin to be loaded by the standard overlay,
-    # i.e. if it wasnt on nixpkgs, but doesnt have an extra build step.
+    # i.e. if it wasn't on nixpkgs, but doesnt have an extra build step.
     # Then you should name it "plugins-something"
     # If you wish to define a custom build step not handled by nixpkgs,
     # then you should name it in a different format, and deal with that in the
@@ -46,7 +46,7 @@
       # It gets resolved within the builder itself, and then passed to your
       # categoryDefinitions and packageDefinitions.
 
-      # this allows you to use ${pkgs.system} whenever you want in those sections
+      # this allows you to use ${pkgs.stdenv.hostPlatform.system} whenever you want in those sections
       # without fear.
 
       dependencyOverlays = # (import ./overlays inputs) ++
@@ -127,7 +127,7 @@
               stdenv.cc.cc
               stylua
               universal-ctags
-              self.packages.${pkgs.system}.prettier-with-plugins
+              self.packages.${pkgs.stdenv.hostPlatform.system}.prettier-with-plugins
             ];
 
             full = with pkgs; [
@@ -313,7 +313,7 @@
               # IMPORTANT:
               # your alias may not conflict with your other packages.
               aliases = [ "vim" ];
-              # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.system}.neovim;
+              # neovim-unwrapped = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
               hosts.python3.enable = true;
               hosts.node.enable = true;
             };
