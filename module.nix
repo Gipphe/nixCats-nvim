@@ -41,6 +41,7 @@ in
     markdown = lib.mkEnableOption "markdown";
     narrow_screen = lib.mkEnableOption "narrow_screen";
     nix = lib.mkEnableOption "nix";
+    nushell = lib.mkEnableOption "nushell";
     powershell = lib.mkEnableOption "powershell";
     python = lib.mkEnableOption "python";
     qml = lib.mkEnableOption "qml";
@@ -290,6 +291,11 @@ in
     enable = config.cats.json;
     data = null;
     runtimePkgs = [ pkgs.vscode-langservers-extracted ];
+  };
+  config.specs.nushell = {
+    enable = config.cats.nushell;
+    data = null;
+    runtimePkgs = [ pkgs.nufmt ];
   };
   config.specs.yaml = {
     enable = config.cats.yaml;

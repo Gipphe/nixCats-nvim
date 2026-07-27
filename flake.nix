@@ -56,6 +56,7 @@
         lua = true;
         markdown = true;
         nix = true;
+        nushell = true;
         powershell = true;
         python = true;
         qml = false;
@@ -83,6 +84,7 @@
         js = false;
         lua = false;
         markdown = true;
+        nushell = false;
         nix = false;
         powershell = false;
         python = false;
