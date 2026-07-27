@@ -166,7 +166,7 @@ return {
           json = 'jsonls',
           lua = 'lua_ls',
           markdown = 'marksman',
-          nix = { 'nil', nixInfo.isNix and 'nixd' or 'rnix' },
+          nix = { nixInfo.isNix and 'nixd' or 'nil' },
           powershell = 'powershell_es',
           python = 'ruff',
           qml = 'qmlls',
