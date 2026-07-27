@@ -62,6 +62,9 @@ return {
         nix = {
           nix = { 'nixfmt' },
         },
+        nushell = {
+          nu = { 'nufmt' },
+        },
         python = {
           python = { 'ruff_format', 'ruff_organize_imports' },
         },
