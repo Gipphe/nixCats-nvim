@@ -188,6 +188,33 @@ return {
       vim.keymap.del('n', 'gO')
       vim.keymap.del('i', '<C-S>')
 
+      local log_file_path = vim.lsp.log.get_filename()
+
+      -- Keep the LSP log from growing unbounded: if it's over 500 KB on
+      -- startup, trim it down to the most recent 500 KB.
+      do
+        local uv = vim.uv or vim.loop
+        local max_size = 500 * 1024
+        local stat = uv.fs_stat(log_file_path)
+        if stat and stat.size > max_size then
+          local fd = uv.fs_open(log_file_path, 'r+', 438)
+          if fd then
+            local data = uv.fs_read(fd, max_size, stat.size - max_size)
+            if data then
+              uv.fs_write(fd, data, 0)
+              uv.fs_ftruncate(fd, max_size)
+            end
+            uv.fs_close(fd)
+          end
+        end
+      end
+
+      vim.api.nvim_create_user_command('LspLog', function()
+        vim.cmd.edit(log_file_path)
+      end, {
+        desc = 'Open the LSP log',
+      })
+
       vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
         callback = function(event)
