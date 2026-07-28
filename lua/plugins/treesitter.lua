@@ -15,7 +15,7 @@ return {
     end,
     after = function()
       local opts = {
-        install_dir = vim.fn.stdpath 'data' .. '/site',
+        install_dir = nixInfo(vim.fn.stdpath 'data' .. '/site', 'info', 'treesitter-install-dir'),
       }
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
       -- NOTE: We use the `main` branch of nvim-treesitter, and thus have to take
@@ -117,13 +117,8 @@ return {
       ---@module 'treesitter-modules'
       ---@type ts.mod.UserConfig
       local opts = {
-        -- TODO: Uncomment these lines once the nixpkgs-provided grammars work
-        -- correctly.
-        --
-        -- ensure_installed = not nixInfo.isNix and { 'stable' } or nil,
-        -- auto_install = not nixInfo.isNix,
-        ensure_installed = { 'stable' },
-        auto_install = true,
+        ensure_installed = not nixInfo.isNix and { 'stable' } or nil,
+        auto_install = not nixInfo.isNix,
         highlight = {
           enable = true,
           -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.

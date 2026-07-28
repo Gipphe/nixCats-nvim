@@ -35,11 +35,13 @@
         "x86_64-linux"
         "aarch64-linux"
       ];
-      module = lib.modules.importApply ./module.nix inputs;
+      module = lib.modules.importApply ./module.nix {
+        inherit inputs;
+        inherit (self) packages;
+      };
       neovimModule = {
         imports = [ module ];
         cats = baseCats;
-        # specs = lib.mapAttrs (_: enabled: { inherit enabled; }) baseCats;
       };
       droidModule = {
         imports = [ module ];
@@ -181,6 +183,7 @@
           droid = self.wrappers.droid.wrap { inherit pkgs; };
           default = self.packages.${system}.neovim;
           prettier-with-plugins = pkgs.callPackage ./packages/prettier-with-plugins.nix { };
+          treesitter-parsers-and-queries = pkgs.callPackage ./packages/treesitter-parsers-and-queries.nix { };
         }
       );
       devShells = forAllSystems (
