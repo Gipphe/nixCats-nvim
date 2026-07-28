@@ -172,7 +172,10 @@ in
   config.specs.fish = {
     enable = config.cats.fish;
     data = null;
-    runtimePkgs = [ pkgs.fish-lsp ];
+    runtimePkgs = [
+      pkgs.fish-lsp
+      pkgs.fishMinimal
+    ];
   };
   config.specs.go = {
     enable = config.cats.go;
