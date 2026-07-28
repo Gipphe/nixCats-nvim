@@ -167,6 +167,7 @@ return {
           lua = 'lua_ls',
           markdown = 'marksman',
           nix = { nixInfo.isNix and 'nixd' or 'nil' },
+          nushell = 'nushell',
           powershell = 'powershell_es',
           python = 'ruff',
           qml = 'qmlls',

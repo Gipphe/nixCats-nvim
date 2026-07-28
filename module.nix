@@ -295,7 +295,10 @@ in
   config.specs.nushell = {
     enable = config.cats.nushell;
     data = null;
-    runtimePkgs = [ pkgs.nufmt ];
+    runtimePkgs = [
+      pkgs.nushell
+      pkgs.nufmt
+    ];
   };
   config.specs.yaml = {
     enable = config.cats.yaml;
