@@ -1,4 +1,4 @@
-inputs:
+{ inputs, packages }:
 {
   config,
   wlib,
@@ -136,10 +136,7 @@ in
         inherit (pkgs)
           codespell
           fd
-          gcc # Required by tree-sitter
-          gzip # Required by tree-sitter
           ripgrep
-          tree-sitter
           universal-ctags
           ;
       }
@@ -149,6 +146,8 @@ in
         flakePackages.prettier-with-plugins
       ];
   };
+  config.info.treesitter-install-dir =
+    packages.${pkgs.stdenv.hostPlatform.system}.treesitter-parsers-and-queries.outPath;
   config.specs.catppuccin = {
     data = [ pkgs.vimPlugins.catppuccin-nvim ];
     lazy = true;
