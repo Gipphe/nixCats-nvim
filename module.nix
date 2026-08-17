@@ -254,7 +254,10 @@ in
   config.specs.rust = {
     enable = config.cats.rust;
     data = null;
-    runtimePkgs = [ pkgs.rust-analyzer ];
+    runtimePkgs = [
+      pkgs.rust-analyzer
+      pkgs.rustfmt
+    ];
   };
   config.specs.sql = {
     enable = config.cats.sql;
