@@ -71,6 +71,9 @@ return {
         bash = {
           sh = { 'shfmt' },
         },
+        rust = {
+          rust = { 'rustfmt' },
+        },
         terraform = {
           terraform = { 'tofu_fmt' },
         },
